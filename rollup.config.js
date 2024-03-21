@@ -6,7 +6,8 @@ import copy from 'rollup-plugin-copy';
 
 const isDev = process.env.ROLLUP_WATCH === 'true';
 
-export default {
+export default [{
+
     input: 'src/index.js',
     output: {
         file: 'dist/index.js',
@@ -16,16 +17,16 @@ export default {
 
         cleanup(),
         resolve(),
-        copy({
-            targets: [
-                { src: 'src/index.html', dest: 'dist' }
-            ]}),
+        // copy({
+        //     targets: [
+        //         { src: 'src/index.html', dest: 'dist' }
+        //     ]}),
         isDev && serve({
             open: true, // Open the browser
             contentBase: 'dist',
             host: 'localhost',
             port: 3000
         }),
-        isDev && livereload('dist')
+        isDev && livereload('dist'),
     ]
-};
+}];
