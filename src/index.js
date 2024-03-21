@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, signOut, OAuthProvider  } from "firebase/auth";
+import { getAuth, signInWithPopup, signOut, OAuthProvider, onAuthStateChanged  } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,14 +22,28 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new OAuthProvider('microsoft.com');
 
-export async function signInOrSignOut() {
+onAuthStateChanged(auth, (user) => {
     const signInButton = document.getElementById('signInButton');
+    const userText = document.getElementById('userText');
+    console.log(user);
+    if (user) {
+        console.log('User is signed in');
+        signInButton.textContent = 'Sign Out';
+        userText.textContent = user.displayName;
+    } else {
+        console.log('User is signed out');
+        signInButton.textContent = 'Sign In with Microsoft';
+        userText.textContent = '';
+    }
+});
+
+export async function signInOrSignOut() {
     if (auth.currentUser) {
         await signOut(auth);
-        signInButton.textContent = 'Sign In with Microsoft';
     } else {
         await signInWithPopup(auth, provider);
-        signInButton.textContent = 'Sign Out';
     }
 }
+
+document.getElementById('signInButton').addEventListener('click', signInOrSignOut);
 

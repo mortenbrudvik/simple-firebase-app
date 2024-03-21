@@ -1,14 +1,22 @@
 <html lang="en">
 <head>
     <title>Simple Firebase App</title>
+    <link rel="stylesheet" href="./style.css">
+    <script>
+        var parcelRequire;
+    </script>
 </head>
 <body>
-<h1>Welcome to Simple Firebase Apps</h1>
-<button id="signInButton">Sign In with Microsoft</button>
+<header>
+    <h1>Welcome to Simple Firebase Apps</h1>
+    <button id="signInButton">Sign In with Microsoft</button>
+</header>
 
-<script type="module">
-    import { signInOrSignOut } from '../dist/index.js';
-    document.getElementById('signInButton').addEventListener('click', signInOrSignOut);
+<main>
+    <div>Welcome <span id="userText"></span></div>
+</main>
+
+<script type="module" src="./index.js">
 </script>
 </body>
 </html>
