@@ -1,0 +1,12 @@
+# Node modules
+/node_modules/
+
+# Rollup build output
+/dist/
+
+# Environment variables
+.env
+
+# Rider IDE
+/.idea/
+
